@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Collapsible,
   CollapsibleContent,
@@ -24,6 +26,7 @@ import {
   Text,
 } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const toysGroup = [
   {
@@ -82,6 +85,7 @@ const toysGroup = [
 ];
 
 export function AppSidebar() {
+  const pathname = usePathname();
   return (
     <Sidebar>
       <SidebarHeader>
@@ -113,7 +117,13 @@ export function AppSidebar() {
                       {toy.items.map((i) => (
                         <SidebarMenuItem key={i.name}>
                           <SidebarMenuButton asChild>
-                            <Link href={`${toy.path}/${i.path}`}>
+                            <Link
+                              className={
+                                pathname.startsWith(`${toy.path}/${i.path}`)
+                                  ? "bg-sidebar-accent"
+                                  : ""
+                              }
+                              href={`${toy.path}/${i.path}`}>
                               <i.icon />
                               <span>{i.name}</span>
                             </Link>
@@ -131,88 +141,3 @@ export function AppSidebar() {
     </Sidebar>
   );
 }
-
-// export function Sidebar() {
-//   return (
-//     <div className="w-[240px] border-r bg-muted/40">
-//       <div className="p-6">
-//         <h1 className="text-2xl font-bold tracking-tight">IT-TOOLS</h1>
-//         <p className="text-sm text-muted-foreground">
-//           Tools for developers and IT professionals
-//         </p>
-//       </div>
-//       <div className="space-y-4">
-//         <div className="px-3 py-2">
-//           <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
-//             Tools
-//           </h2>
-//           <div className="space-y-1">
-//             <Button
-//               variant="ghost"
-//               className="w-full justify-start gap-2"
-//               asChild>
-//               <Link href="/token">
-//                 <Key className="h-4 w-4" />
-//                 Token Generator
-//               </Link>
-//             </Button>
-//             <Button
-//               variant="ghost"
-//               className="w-full justify-start gap-2"
-//               asChild>
-//               <Link href="/hash">
-//                 <Hash className="h-4 w-4" />
-//                 Hash Text
-//               </Link>
-//             </Button>
-//             <Button
-//               variant="ghost"
-//               className="w-full justify-start gap-2"
-//               asChild>
-//               <Link href="/encrypt">
-//                 <Lock className="h-4 w-4" />
-//                 Encrypt
-//               </Link>
-//             </Button>
-//             <Button
-//               variant="ghost"
-//               className="w-full justify-start gap-2"
-//               asChild>
-//               <Link href="/uuid">
-//                 <Fingerprint className="h-4 w-4" />
-//                 UUID Generator
-//               </Link>
-//             </Button>
-//             <Button
-//               variant="ghost"
-//               className="w-full justify-start gap-2"
-//               asChild>
-//               <Link href="/ulid">
-//                 <Shuffle className="h-4 w-4" />
-//                 ULID Generator
-//               </Link>
-//             </Button>
-//             <Button
-//               variant="ghost"
-//               className="w-full justify-start gap-2"
-//               asChild>
-//               <Link href="/decrypt">
-//                 <LockKeyhole className="h-4 w-4" />
-//                 Decrypt
-//               </Link>
-//             </Button>
-//             <Button
-//               variant="ghost"
-//               className="w-full justify-start gap-2"
-//               asChild>
-//               <Link href="/verify">
-//                 <ShieldCheck className="h-4 w-4" />
-//                 PDF Signature Verifier
-//               </Link>
-//             </Button>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
