@@ -1,23 +1,22 @@
-import type { Metadata } from "next";
+"use client";
+
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/app/components/header";
 import { AppSidebar } from "@/app/components/app-sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
+import { AppBreadcrumb } from "./components/app-breadcrumb";
+import { usePathname } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: "MY - TOYS",
-  description: "Tools for developers and IT professionals",
-};
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
@@ -32,6 +31,7 @@ export default function RootLayout({
               <div className="flex-1 flex flex-col overflow-hidden">
                 <Header />
                 <main className="flex-1 overflow-y-auto bg-background">
+                  {pathname !== "/" && <AppBreadcrumb />}
                   {children}
                 </main>
               </div>

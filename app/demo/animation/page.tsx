@@ -1,3 +1,5 @@
+import { redirect } from "next/navigation";
+
 export default function Animation() {
-  return <div>animation</div>;
+  redirect("/demo/animation/frame");
 }

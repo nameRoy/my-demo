@@ -1,0 +1,14 @@
+@keyframes frameAnimation {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(calc(100% - 700px) * -1));
+  }
+}
+
+.frameAnimation {
+  animation-name: frameAnimation;
+  animation-timing-function: steps(calc(var(--frames-count) - 1), end);
+  animation-fill-mode: forwards;
+}

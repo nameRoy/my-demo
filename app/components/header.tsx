@@ -25,6 +25,11 @@ export function Header() {
             startAdornment={
               <Search className="w-4 h-4 text-muted-foreground" />
             }
+            endAdornment={
+              <>
+                <kbd>cmd</kbd>+<kbd>k</kbd>
+              </>
+            }
           />
         </div>
         <div className="flex items-center gap-4">
